@@ -1,7 +1,7 @@
 //MongoConnect.js
 //By: Sam Schmitz
 
-const {MongoClient, GridFSBucket} = require('mongodb');
+const {MongoClient} = require('mongodb');
 
 const ClothesDBManager = {
 	url: 'mongodb://localhost:27017',
@@ -131,6 +131,7 @@ let filter = {
 	"categories.type": "shirt"
 };
 
+/*
 (async () => {
 	try {
 		await ClothesDBManager.connect();
@@ -140,3 +141,6 @@ let filter = {
 		await ClothesDBManager.closeConnection();
 	}
 })();
+*/
+
+module.exports = ClothesDBManager
