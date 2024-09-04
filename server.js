@@ -17,7 +17,8 @@ app.get('/api', (req, res) => {
 
 app.get('/api/clothes', async (req, res) => {
     try {
-        const clothes = await ClothesDBManager.findClothes(filter);
+        const clothingType = req.query.type;
+        const clothes = await ClothesDBManager.findClothes(clothingType);
         res.json(clothes);
     } catch (error) {
         console.error('Error fetching clothes:', error);
