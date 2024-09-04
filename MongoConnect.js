@@ -123,7 +123,7 @@ const halfzipUniqlo = {
 	dateAdded: 20240901
 }
 
-const sweatshirt = {
+const sweatshirtNike = {
 
 }
 
