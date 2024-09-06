@@ -157,7 +157,7 @@ let filter = {
 	"categories.type": "shirt"
 };
 
-
+/*
 (async () => {
 	try {
 		await ClothesDBManager.connect();
@@ -181,6 +181,6 @@ let filter = {
 		await ClothesDBManager.closeConnection();
 	}
 })();
-
+*/
 
 module.exports = ClothesDBManager

@@ -46,6 +46,16 @@ app.delete('/api/clothes', async (req, res) => {
     }
 });
 
+app.patch('/api/clothes', async (req, res) => {
+    try {
+        const mod = await ClothesDBManager.modifyGarment(req.query, req.body);
+        res.send(mod);
+    } catch (error) {
+        console.error('Error while modifying garment: ', error);
+        res.status(500).json({ message: 'An error ocurred while modifying the garment' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
