@@ -77,7 +77,7 @@ const ClothesDBManager = {
 			}
 
 			const result = await this.collection.deleteOne(query);
-			return result.deletedCount	//0 => no deletion, 1 => something gone
+			return result//.deletedCount	//0 => no deletion, 1 => something gone
 		} catch (error) {
 			console.error('Error occurred while deleting a document:', error);
 			throw error;
@@ -142,7 +142,7 @@ let filter = {
 	"categories.type": "shirt"
 };
 
-
+/*
 (async () => {
 	try {
 		await ClothesDBManager.connect();
@@ -162,6 +162,6 @@ let filter = {
 		await ClothesDBManager.closeConnection();
 	}
 })();
-
+*/
 
 module.exports = ClothesDBManager

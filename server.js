@@ -36,6 +36,16 @@ app.post('/api/clothes', async (req, res) => {
     }
 });
 
+app.delete('/api/clothes', async (req, res) => {
+    try {
+        const deletion = await ClothesDBManager.deleteGarment(req.body);
+        res.send(deletion);
+    } catch (error) {
+        console.error('Error deleting garment:', error);
+        res.status(500).json({message: 'An error ocurred while deleting the garment'})
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
