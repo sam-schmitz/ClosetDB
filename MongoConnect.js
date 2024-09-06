@@ -69,6 +69,21 @@ const ClothesDBManager = {
         }
 	},
 
+	async deleteGarment(query) {
+		try {
+			//ensure the client is connected
+			if (!this.client) {
+				await this.connect();
+			}
+
+			const result = await this.collection.deleteOne(query);
+			return result.deletedCount	//0 => no deletion, 1 => something gone
+		} catch (error) {
+			console.error('Error occurred while deleting a document:', error);
+			throw error;
+        }
+	},
+
 	//method to close the db
 	async closeConnection() {
 		if (this.client) {
@@ -123,24 +138,30 @@ const halfzipUniqlo = {
 	dateAdded: 20240901
 }
 
-const sweatshirtNike = {
-
-}
-
 let filter = {
 	"categories.type": "shirt"
 };
 
-/*
+
 (async () => {
 	try {
 		await ClothesDBManager.connect();
-		const documents = await ClothesDBManager.findClothes(filter);
+		const documents = await ClothesDBManager.findClothes({
+			"name": "test"
+		});
 		console.log('Found documents:', documents);
+		const d = await ClothesDBManager.deleteGarment({
+			"name": "test"
+		});
+		console.log(d);
+		const doc2 = await ClothesDBManager.findClothes({
+			"name": "test"
+		});
+		console.log(doc2);
 	} finally {
 		await ClothesDBManager.closeConnection();
 	}
 })();
-*/
+
 
 module.exports = ClothesDBManager
