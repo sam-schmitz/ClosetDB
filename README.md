@@ -6,7 +6,7 @@
 <ul>
   <li>
     <h3>Server</h3>
-    <p><b>Description: </b>Takes requests and returns a response. Accepts GET, POST, and DELETE requests.  </p>
+    <p><b>Description: </b>Takes requests and returns a response. Accepts GET, POST, PATCH, and DELETE requests.  </p>
     <p><b>Location: </b>server.js</p>
   </li>
   <li>
