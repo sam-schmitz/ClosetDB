@@ -84,6 +84,21 @@ const ClothesDBManager = {
         }
 	},
 
+	async modifyGarment(query, update) {
+		try {
+			//ensure the client is connected
+			if (!this.client) {
+				await this.connect();
+			}
+
+			const result = await this.collection.updateOne(query, { $set: update });
+			return result;
+		} catch (error) {
+			console.error('Error occurred while modifying a document: ', error);
+			throw error;
+        }
+    },
+
 	//method to close the db
 	async closeConnection() {
 		if (this.client) {
@@ -142,26 +157,30 @@ let filter = {
 	"categories.type": "shirt"
 };
 
-/*
+
 (async () => {
 	try {
 		await ClothesDBManager.connect();
-		const documents = await ClothesDBManager.findClothes({
-			"name": "test"
-		});
+		const add = await ClothesDBManager.addClothing({ "name": "test", "color": "red" });
+		console.log(add);
+
+		const documents = await ClothesDBManager.findClothes({"name": "test"});
 		console.log('Found documents:', documents);
-		const d = await ClothesDBManager.deleteGarment({
-			"name": "test"
-		});
-		console.log(d);
-		const doc2 = await ClothesDBManager.findClothes({
-			"name": "test"
-		});
+
+		const m = await ClothesDBManager.modifyGarment(
+			{ "name": "test" }, { "color": "blue" }
+		);
+		console.log(m);
+
+		const doc2 = await ClothesDBManager.findClothes({"name": "test"});
 		console.log(doc2);
+
+		const d = await ClothesDBManager.deleteGarment({ "name": "test" });
+		console.log(d);
 	} finally {
 		await ClothesDBManager.closeConnection();
 	}
 })();
-*/
+
 
 module.exports = ClothesDBManager
